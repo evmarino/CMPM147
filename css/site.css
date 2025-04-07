@@ -11,39 +11,77 @@ h1, h2 {
 
 .two-column {
   display: flex;
-  gap: 20px;
-  align-items: flex-start;
+  justify-content: center;
+  gap: 30px;
+  align-items: stretch;
 }
 
 #content {
   width: calc(100% - 30px);
   margin: 10px;
   padding: 10px;
-  border: solid 1px #808;
   font-family: "Jersey 15", sans-serif;
 }
 
 .minor-section {
-  flex:1;
-  margin: 5px;
+  flex: 1;
+  margin: 0;
   padding: 10px;
+  font-size: 30px;
   border: solid 1px #000000;
   border-radius: 10px;
   color: #5c2153;
 }
 
 .minor-section h2 {
-  flex:1;
+  flex: 1;
   padding: 10px;
   font-size: 1.2em;
+  border: solid 1px #000000;
+  font-size: 30px;
+  border-radius: 10px;
 }
+
+.image-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.image-wrapper {
+  border: solid 1px #000000;
+  border-radius: 10px;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;}
 
 /* Set the image to be responsive */
 .image-wrapper img {
-  display:block;
-  max-width: 100%;
+  display: block;
   margin: 0 auto;
+  max-width: 100%;
   height: auto;
+  border-radius: 10px;
+  
+}
+.image-link {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 0.9em;
+  color: #5c2153;
+}
+
+.image-link a {
+  color: #5c2153;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.image-link a:hover {
+  text-decoration: underline;
 }
 
 /* Set the canvas element to be the full size of the container */
@@ -72,6 +110,6 @@ body.is-fullscreen #canvas-container {
   z-index: 1000; /* Ensure it's above other content */
 }
  
-html{
+html {
   background-color: hsl(0, 19%, 87%);
 }
