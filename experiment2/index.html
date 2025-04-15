@@ -27,35 +27,54 @@
 	<!-- Use me for a p5.js project -->
 	<script type="text/javascript" src="./js/sketch.js" DEFER></script>
 </head>
+<link href="https://fonts.googleapis.com/css2?family=Jersey+15&display=swap" rel="stylesheet">
 <body>
 	<!-- Style this page by changing the CSS in ../css/site.css or css/experiment.css -->
 	<main id="content">
+		<div class="page-container"></div>
 		<section>
 
-			<h1>Experiment X - Subject/Topic</h1>
+			<h1>Experiment 2 - Living Impressions</h1>
 
-			<div class="minor-section">
-				<div id="canvas-container">
-					<!-- canvas will be added here -->
+			<div class="landscape-content"
+			<div id="canvas-container">
+		
+				<div class="fullscreen-box">
+				  <button id="reimagine">Reimagine</button>
+				  <button id="fullscreen">Fullscreen</button>
+				  <button id="exit-fullscreen" style="display: none;">Exit Fullscreen</button>
 				</div>
-                <div class="fullscreen-box">
-                    <button id="fullscreen">Fullscreen</button>
-                </div>
+			  </div>
+			
+	
+			<div class="side-by-side-container">
+				<div class="minor-section description-box">
+				  <h2>Description</h2>
+				  <p>In this experiment, the goal was to recreate a landscape. I chose to do a generative, living impression of a cherry blossom tree:</p>
+				  <img src="https://www.thepavilion.ie/cdn/shop/articles/Spring_flowering_tree_cherry_blossom_520x500_91757814-d8c2-4c65-b65a-5fb20e26b8e6.webp?v=1678978237" 
+					   alt="Cherry Blossom" 
+					   style="width: 100%; height: auto;" />
+				  <p style="font-size: 0.9em;"><a href="https://www.thepavilion.ie/cdn/shop/articles/Spring_flowering_tree_cherry_blossom_520x500_91757814-d8c2-4c65-b65a-5fb20e26b8e6.webp?v=1678978237" target="_blank">Source</a></p>
+				</div>
+			  
+				<div class="minor-section technical-box">
+				  <h2>Technical</h2>
+				  <p>Relation to inspiring image:</p>
+				  <ul style="list-style-type: none; padding-left: 0;">
+					<li>🌸 <strong>Color:</strong> The trees and colors were all inspired by the image pictured above. </li>
+					<li>🌸 <strong>Primitives:</strong> The leaves and the sun are rendered with "ellipse" primitives, the sky and grass with rectangles. </li>
+					<li>🌸 <strong>Polygons:</strong> The grass is created using triangles via vertex calls. </li>
+					<li>🌸 <strong>Composition:</strong> Random seeds vary tree shapes and placement. </li>
+					<li>🌸 <strong>Life:</strong> The sun shifts with mouse movement, simulating time. </li>
+				  </ul>
+				</div>
+			  </div>
 			</div>
 
-			<div class="minor-section">
-				<h2>Description</h2>
-				<p>What are you trying to acomplish with this experiment?</p>
-			</div>
-
-			<div class="minor-section">
-				<h2>Technical</h2>
-				<p>Describe in detail what you did technically and how it works?</p>
-			</div>
-
+			
 			<div class="minor-section">
 				<h2>Reflection</h2>
-				<p>Each person that worked on the code should reflect on the process, the difficulties, and the successes of the experiment.</p>
+				<p>I learned a lot doing this project and I really enjoyed it. While it was a bit of a fast paced timeline, I dove into recursive trees and challenged myself to implement those into this landscape. This project pushed me out of my comfort zone, but I really enjoyed doing my own research and seeing the big picture come together in the end. </p>
 			</div>
 
 		</section>
@@ -65,6 +84,8 @@
                 <li><a href="../index.html">Home</a></li>
             </ul>
 		</nav>
+	</div> 
 	</main>
+
 </body>
 </html>

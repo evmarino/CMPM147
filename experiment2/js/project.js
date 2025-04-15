@@ -1,6 +1,9 @@
-// project.js - purpose and description here
-// Author: Your Name
-// Date:
+// project.js - Generative, living impression using p5.js. 
+// Various cherry blossom trees regenerating and creating landscape.
+// Various times of day represented through the sun cycle, controlled by horizontal mouse movement.
+
+// Author: Evelyn Marino 
+// Date: April 14, 2025
 
 // NOTE: This is how we might start a basic JavaaScript OOP project
 
@@ -31,4 +34,4 @@ function main() {
 }
 
 // let's get this party started - uncomment me
-//main();
+main();
