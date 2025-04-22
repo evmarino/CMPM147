@@ -20,6 +20,7 @@
 	<!-- Load p5.js library -->
 	<script src="https://cdn.jsdelivr.net/npm/p5@1.9.2/lib/p5.js"></script>
 
+	<link href="https://fonts.googleapis.com/css2?family=Jersey+15&display=swap" rel="stylesheet">
 	<!-- Link to javascript files - DEFER waits until all elements are rendered -->
     <script type="text/javascript" src="../js/site.js" DEFER></script>
 	<!-- Use me for a JavaScript OOP Project -->
@@ -32,11 +33,19 @@
 	<main id="content">
 		<section>
 
-			<h1>Experiment X - Subject/Topic</h1>
+			<h1>Experiment 3 - Alternate Worlds</h1>
 
 			<div class="minor-section">
 				<div id="canvas-container">
 					<!-- canvas will be added here -->
+					<div id="canvas-wrapper">
+						<div id="overworld-container"></div>
+						<div id="dungeon-container"></div>
+					  </div>
+					  <button id="overworld-reseed">Reseed Overworld</button>
+					  <button id="dungeon-reseed">Reseed Dungeon</button>
+					  </section>
+					
 				</div>
                 <div class="fullscreen-box">
                     <button id="fullscreen">Fullscreen</button>
@@ -45,20 +54,20 @@
 
 			<div class="minor-section">
 				<h2>Description</h2>
-				<p>What are you trying to acomplish with this experiment?</p>
+				<p>I created procedurally generated worlds using tilemaps, there is an Overworld and Dungeon layout that reseeds on click and creates unique map layouts </p>
 			</div>
 
 			<div class="minor-section">
 				<h2>Technical</h2>
-				<p>Describe in detail what you did technically and how it works?</p>
+				<p> I created two different p5.js sketches for each world and in the overworld I use Perlin noise to carve out a river path and then mark its banks, and in the dungeon I picked a random rectangular room. Both worlds are generated once per seed, stored in memory, and then drawn every frame by looping over the array, calling placeTile into a shared tileset, and using a 4×4 bitmask lookup to handle all edge and corner tiling automatically. The animations Ive included are little dust specks in the dungeon and overworld, and a shimmer light that respond to time or mouse position.</p>
 			</div>
-
 			<div class="minor-section">
 				<h2>Reflection</h2>
-				<p>Each person that worked on the code should reflect on the process, the difficulties, and the successes of the experiment.</p>
+				<p>I had a hard time navigating the atlas for the tiles and working on getting the proper tiles to show up on screen, but I managed to draw a grid in the CSS of the tilemap in order to get  more accurate reads and save time.I enjoyed coding the animations into the layouts and I'd say it makes the layouts come together nicely to form a cohesive look </p>
 			</div>
 
 		</section>
+		
 		<nav id="links" class="minor-section">
 			<!-- Put link back to homepage here. -->
             <ul>
@@ -66,5 +75,8 @@
             </ul>
 		</nav>
 	</main>
+	<script src="./js/sketch.js" defer></script>
+</body>
+</html>
 </body>
 </html>
