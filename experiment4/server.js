@@ -5,10 +5,12 @@ const fetch   = require('node-fetch');
 const path    = require('path');
 const app     = express();
 
-// 1) Enable CORS so same-origin or cross-origin both work
 app.use(cors());
 
-// 2) Serve all static files from ./public
+app.use(
+  '/experiment4',
+  express.static(path.join(__dirname, 'experiment4'))
+);
 app.use(express.static(path.join(__dirname, 'public')));
 
 const tmdbKey = process.env.tmdbAPI;
