@@ -1,0 +1,55 @@
+/* style.css */
+
+/* reset margins */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+  
+  /* use your Jersey 15 font everywhere */
+  body {
+    font-family: "Jersey 15", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* the div that p5.js will fill */
+  #container {
+    width: 100%;
+    max-width: 800px;      /* same width you use in createCanvas */
+    height: 400px;         /* same height you use in createCanvas */
+    position: relative;    /* so the canvas can be absolutely positioned */
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  /* force the p5 canvas to fill its parent */
+  #container canvas {
+    position: absolute !important;
+    top: 0; left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+  }
+  
+  /* style the input box and its label/p text */
+  label, p {
+    margin: 0.25rem 0;
+    text-align: center;
+  }
+  
+  input[type="text"] {
+    font-size: 1rem;
+    padding: 0.25rem 0.5rem;
+    width: 200px;
+    box-sizing: border-box;
+  }
+  
+  /* Optional: style the “last recommendation” text */
+  #lastRec {
+    font-weight: bold;
+    margin-top: 0.5rem;
+  }
+  
