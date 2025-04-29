@@ -71,26 +71,16 @@ function setup() {
   if (window.p3_setup) {
     window.p3_setup();
   }
+  let label = createP("World key: ").parent("container");
+  let input = createInput("xyzzy");
+  input.id("worldKey");
+  input.attribute("name","worldKey");
+  input.parent(label);
+  input.input(() => rebuildWorld(input.value()));
 
-  let label = createP();
-  label.html("World key: ");
-  label.parent("container");
-  
+  createP("Arrow keys scroll. Hold mouse down to decide on a movie to watch.")
+    .parent("container");
 
-let input = createInput("xyzzy");
-input.id("worldKey");              
-input.attribute("name", "worldKey"); 
-input.parent(label);
-
-input.input(() => {
-  rebuildWorld(input.value());
-});
-
-  createP("Arrow keys scroll. Hold mouse down to decide on a movie to watch.").parent("container");
-
-  window.prevRecP = createP("Last recommendation: None");
-  prevRecP.parent("container")
-  
   rebuildWorld(input.value());
 }
 
@@ -201,7 +191,7 @@ function drawTileDescription([world_x, world_y], [screen_x, screen_y]) {
   pop();
 }
 
-// Draw a tile, mostly by calling the user's drawing code.
+
 function drawTile([world_x, world_y], [camera_x, camera_y]) {
   let [screen_x, screen_y] = worldToScreen(
     [world_x, world_y],
