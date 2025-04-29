@@ -1,20 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>Experiment 4</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experiment 4 - Three Infinite World Generators</title>
 
- 
-  <link rel="stylesheet" href="js/style.css" />
+  <!-- CSS -->
+  <link rel="stylesheet" type="text/css" href="../css/site.css">
+  <link rel="stylesheet" type="text/css" href="./css/style.css">
 
-  
-  
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
-  <script defer src="js/xxhash.min.js"></script>
-  <script defer src="js/engine.js"></script>
-  <script defer src="js/my_world.js"></script>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Jersey+15&display=swap" rel="stylesheet">
+
+  <!-- Libraries -->
+  <script src="https://unpkg.com/xxhashjs@0.2.2/build/xxhash.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.9.2/lib/p5.js"></script>
+
+  <script src="../js/site.js" defer></script>
+  <script src="./js/engine.js" defer></script>
+  <script src="./js/my_world.js" defer></script>
 </head>
+
 <body>
-  <div id="container"></div>
+  <main id="content">
+    <section>
+      <h1>Experiment 4 - Three Infinite World Generators</h1>
+
+      <div class="minor-section">
+        <div id="canvas-container">
+          <div id="canvas-wrapper">
+            <div id="container"></div>
+          </div>
+          <div class="fullscreen-box">
+            <button id="fullscreen-button">Fullscreen</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="minor-section">
+        <h2>Description</h2>
+        <p>This experiment showcases three different procedural generators: a Movie Recommendation Infinite Picker, an Ant Killing Generator, and a Dot Cleaning game. Each generator responds dynamically to clicks and updates the world in fun and creative ways.</p>
+      </div>
+
+      <div class="minor-section">
+        <h2>Technical</h2>
+        <p>Using p5.js, I implemented a world key system based on XXHash hashing and seeded noise/random generators. The movie cube fetches random movie data from TMDB API when clicked, the ant generator simulates procedural movement, and the dot generator requires cleaning randomly scattered dots. All systems share a world coordinate space and dynamic drawing based on seed states.</p>
+      </div>
+
+      <div class="minor-section">
+        <h2>Reflection</h2>
+        <p>I really enjoyed implementing different kinds of generators in the same visual framework. Managing multiple procedural systems helped me better understand world seeding, modularity, and dynamic drawing techniques. I also learned the importance of thinking about user interaction styles like click vs hold across different generators.</p>
+      </div>
+    </section>
+    
+    <nav id="links" class="minor-section">
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+      </ul>
+    </nav>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const fullscreenBtn = document.getElementById('fullscreen-button');
+      fullscreenBtn.addEventListener('click', () => {
+        let fs = fullscreen();
+        fullscreen(!fs);
+      });
+    });
+  </script>
 </body>
 </html>

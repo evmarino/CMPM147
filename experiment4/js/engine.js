@@ -72,16 +72,16 @@ function setup() {
     window.p3_setup();
   }
   let label = createP("World key: ").parent("container");
-  let input = createInput("xyzzy");
-  input.id("worldKey");
-  input.attribute("name","worldKey");
-  input.parent(label);
-  input.input(() => rebuildWorld(input.value()));
+  let inputBox = createInput("xyzzy");
+  inputBox.id("worldKey");
+  inputBox.parent(label);
+  inputBox.input(() => rebuildWorld(inputBox.value()));
+  
 
   createP("Arrow keys scroll. Hold mouse down to decide on a movie to watch.")
     .parent("container");
 
-  rebuildWorld(input.value());
+  rebuildWorld(inputBox.value());
 }
 
 function rebuildWorld(key) {
