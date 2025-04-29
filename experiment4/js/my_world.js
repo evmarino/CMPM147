@@ -16,6 +16,9 @@
   p3_drawBefore, p3_drawTile, p3_drawSelectedTile, p3_drawAfter
 */
 
+
+const TMDB_KEY = '6cc4dac634c0d8cf603757eb4d332374';
+
 // ── Shared State ───────────────────────────────────────────────────
 let worldSeed, tw, th;
 let lastKey = "";
@@ -38,8 +41,7 @@ const generators = {
     preload() {},
     setup() {
       textSize(12);
-      textAlign(CENTER, BOTTOM);
-      // persistent “Last recommendation” line
+      //textAlign(CENTER, BOTTOM);
       let p = createP("Last recommendation: ");
       p.id("lastRec");
       p.parent("container");
@@ -53,34 +55,48 @@ const generators = {
     tileWidth()  { return 32; },
     tileHeight() { return 16; },
     tileClicked(i,j) {
-      let key = `${i},${j}`;
+      const key = `${i},${j}`;
       if (!recs[key]) {
-        fetch("https://movie-cube.glitch.me/api/randomMovie")
-        .then(r => r.json())
+        // pick a random page
+        const page = Math.floor(Math.random() * 500) + 1;
+        const url  = `https://api.themoviedb.org/3/discover/movie`
+                   + `?api_key=${TMDB_KEY}`
+                   + `&page=${page}`;
+
+        fetch(url)
+          .then(r => r.json())
           .then(data => {
-            recs[key] = data.title
-              ? `${data.title} (${data.year})`
+            const results = Array.isArray(data.results) ? data.results : [];
+            const pick    = results[Math.floor(Math.random()*results.length)] || {};
+            recs[key] = pick.title
+              ? `${pick.title} (${pick.release_date?.slice(0,4)})`
               : "No rec available";
-            select("#lastRec").html(`Last recommendation: ${recs[key]}`);
+            select("#lastRec")
+              .html(`Last recommendation: ${recs[key]}`);
           })
-          .catch(_ => recs[key] = "Fetch error");
+          .catch(err => {
+            console.error("TMDB fetch error:", err);
+            recs[key] = "Fetch error";
+            select("#lastRec")
+              .html(`Last recommendation: ${recs[key]}`);
+          });
       }
     },
     drawBefore() {},
     drawTile(i,j) {
       noStroke();
-      let h = XXH.h32(`tile:${i},${j}`, worldSeed);
+      const h = XXH.h32(`tile:${i},${j}`, worldSeed);
       fill(h & 0xFF, (h >>> 8) & 0xFF, (h >>> 16) & 0xFF);
       push();
         beginShape();
           vertex(-tw,0); vertex(0, th);
           vertex(tw,0);  vertex(0,-th);
         endShape(CLOSE);
-        let key = `${i},${j}`;
+        const key = `${i},${j}`;
         if (recs[key]) {
           noStroke();
           fill(255);
-          text(recs[key], 0, -th - 4, tw * 1.8);
+          text(recs[key], 0, -th - 4);
         }
       pop();
     },
@@ -110,7 +126,7 @@ const generators = {
     tileHeight() { return 16; },
     tileClicked(i,j) {
       if (!antAlive) return;
-      let head = antPath[0];
+      const head = antPath[0];
       if (i === head.x && j === head.y) {
         antAlive = false;
         killer   = { x:i, y:j, t:frameCount };
@@ -127,7 +143,6 @@ const generators = {
           vertex(-tw,0); vertex(0, th);
           vertex(tw,0);  vertex(0,-th);
         endShape(CLOSE);
-        // random rocks
         if (XXH.h32(`rock:${i},${j}`, worldSeed) % 20 === 0) {
           fill(150,100,50);
           push();
@@ -139,33 +154,36 @@ const generators = {
     },
     drawSelectedTile(i,j) {},
     drawAfter() {
-      // move
-      if (antAlive && frameCount%stepRate===0) {
-        let head = antPath[0];
-        let ang = noise(head.x*0.1, head.y*0.1, frameCount*0.01)*TWO_PI;
-        let dxr = cos(ang), dyr = sin(ang),
-            dx = 0, dy = 0;
-        if (abs(dxr)>abs(dyr)) dx = dxr>0?1:-1;
-        else                    dy = dyr>0?1:-1;
+      if (antAlive && frameCount % stepRate === 0) {
+        const head = antPath[0];
+        const ang  = noise(head.x*0.1, head.y*0.1, frameCount*0.01)*TWO_PI;
+        const dxr  = cos(ang), dyr = sin(ang);
+        let   dx = 0, dy = 0;
+        if (abs(dxr) > abs(dyr)) dx = dxr>0?1:-1;
+        else                      dy = dyr>0?1:-1;
         antPath.unshift({ x: head.x+dx, y: head.y+dy });
-        if (antPath.length>maxLen) antPath.pop();
+        if (antPath.length > maxLen) antPath.pop();
       }
-      // footprints
       antPath.forEach((seg, idx) => {
-        let [sx,sy] = worldToScreen([seg.x,seg.y],[camera_offset.x, camera_offset.y]);
+        const [sx,sy] = worldToScreen(
+          [seg.x,seg.y],
+          [camera_offset.x, camera_offset.y]
+        );
         push();
-          translate(-sx, sy+th*0.1);
+          translate(-sx, sy + th*0.1);
           noStroke();
           fill(80,50,30, map(idx,0,maxLen,200,50));
-          let w = map(idx,0,maxLen, tw*0.3, tw*0.1),
-              h = w*0.4;
+          const w = map(idx,0,maxLen, tw*0.3, tw*0.1),
+                h = w*0.4;
           ellipse(0,0, w, h);
         pop();
       });
-      // ant or splat
       if (antAlive) {
-        let head = antPath[0];
-        let [hx,hy] = worldToScreen([head.x,head.y],[camera_offset.x,camera_offset.y]);
+        const head = antPath[0];
+        const [hx,hy] = worldToScreen(
+          [head.x,head.y],
+          [camera_offset.x, camera_offset.y]
+        );
         push();
           translate(-hx,hy);
           noStroke(); fill(0);
@@ -178,10 +196,14 @@ const generators = {
             line(tw*0.2,0, tw*0.6, s*th*0.2);
           });
         pop();
-      } else if (killer) {
-        let age = frameCount - killer.t;
+      }
+      else if (killer) {
+        const age = frameCount - killer.t;
         if (age < 30) {
-          let [sx,sy] = worldToScreen([killer.x,killer.y],[camera_offset.x,camera_offset.y]);
+          const [sx,sy] = worldToScreen(
+            [killer.x,killer.y],
+            [camera_offset.x,camera_offset.y]
+          );
           push();
             translate(-sx,sy);
             noStroke();
@@ -211,7 +233,7 @@ const generators = {
       background(0);
     },
     drawTile(i,j) {
-      let h = XXH.h32(`tile:${i},${j}`, worldSeed);
+      const h  = XXH.h32(`tile:${i},${j}`, worldSeed);
       noStroke();
       fill((h&1)?255:0);
       push();
@@ -220,9 +242,9 @@ const generators = {
           vertex(tw,0);  vertex(0,-th);
         endShape(CLOSE);
       pop();
-      let key = `${i},${j}`;
-      if (!cleaned[key] && h%6===0) {
-        fill(h&0xFF, (h>>>8)&0xFF, (h>>>16)&0xFF, 200);
+      const key = `${i},${j}`;
+      if (!cleaned[key] && h % 6 === 0) {
+        fill(h & 0xFF, (h>>>8)&0xFF, (h>>>16)&0xFF, 200);
         ellipse(0,0, tw*0.6, th*0.6);
       }
     },
@@ -239,11 +261,10 @@ function p3_preload() {
 }
 
 function p3_setup() {
-  // add generator selector
   let label = createP("Generator:").parent("container");
   let sel   = createSelect().parent(label);
-  sel.option("Movie Cube",  "movie");
-  sel.option("Ant Killer",  "ant");
+  sel.option("Movie Cube",   "movie");
+  sel.option("Ant Killer",   "ant");
   sel.option("Dot Destroyer","dot");
   sel.changed(() => {
     current = generators[sel.value()];
@@ -255,14 +276,14 @@ function p3_setup() {
 function p3_worldKeyChanged(key) {
   lastKey = key;
   current.worldKeyChanged(key);
-  tw = current.tileWidth();
-  th = current.tileHeight();
+  tw      = current.tileWidth();
+  th      = current.tileHeight();
 }
 
-function p3_tileWidth()      { return tw; }
-function p3_tileHeight()     { return th; }
-function p3_tileClicked(i,j) { current.tileClicked(i,j); }
-function p3_drawBefore()     { current.drawBefore(); }
-function p3_drawTile(i,j)    { current.drawTile(i,j); }
-function p3_drawSelectedTile(i,j) { current.drawSelectedTile(i,j); }
-function p3_drawAfter()      { current.drawAfter(); }
+function p3_tileWidth()         { return tw; }
+function p3_tileHeight()        { return th; }
+function p3_tileClicked(i,j)    { current.tileClicked(i,j); }
+function p3_drawBefore()        { current.drawBefore(); }
+function p3_drawTile(i,j)       { current.drawTile(i,j); }
+function p3_drawSelectedTile(i,j){ current.drawSelectedTile(i,j); }
+function p3_drawAfter()         { current.drawAfter(); }

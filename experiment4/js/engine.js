@@ -76,13 +76,15 @@ function setup() {
   label.html("World key: ");
   label.parent("container");
   
-  ;
 
-  let input = createInput("xyzzy");
-  input.parent(label);
-  input.input(() => {
-    rebuildWorld(input.value()); 
-  });
+let input = createInput("xyzzy");
+input.id("worldKey");              
+input.attribute("name", "worldKey"); 
+input.parent(label);
+
+input.input(() => {
+  rebuildWorld(input.value());
+});
 
   createP("Arrow keys scroll. Hold mouse down to decide on a movie to watch.").parent("container");
 
