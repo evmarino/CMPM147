@@ -3,35 +3,17 @@
 /* global p5 */
 /* exported preload, setup, draw, mouseClicked */
 
-// Project base code provided by {amsmith,ikarth}@ucsc.edu
+let tile_width_step_main;
+let tile_height_step_main;
 
-
-let tile_width_step_main; // A width step is half a tile's width
-let tile_height_step_main; // A height step is half a tile's height
-
-// Global variables. These will mostly be overwritten in setup().
 let tile_rows, tile_columns;
 let camera_offset;
 let camera_velocity;
 
-/////////////////////////////
-// Transforms between coordinate systems
-// These are actually slightly weirder than in full 3d...
-/////////////////////////////
 function worldToScreen([world_x, world_y], [camera_x, camera_y]) {
   let i = (world_x - world_y) * tile_width_step_main;
   let j = (world_x + world_y) * tile_height_step_main;
   return [i + camera_x, j + camera_y];
-}
-
-function worldToCamera([world_x, world_y], [camera_x, camera_y]) {
-  let i = (world_x - world_y) * tile_width_step_main;
-  let j = (world_x + world_y) * tile_height_step_main;
-  return [i, j];
-}
-
-function tileRenderingOrder(offset) {
-  return [offset[1] - offset[0], offset[0] + offset[1]];
 }
 
 function screenToWorld([screen_x, screen_y], [camera_x, camera_y]) {
@@ -63,25 +45,35 @@ function preload() {
 
 function setup() {
   let canvas = createCanvas(800, 400);
-  canvas.parent("container");
-
+  canvas.parent("container");  
   camera_offset = new p5.Vector(-width / 2, height / 2);
   camera_velocity = new p5.Vector(0, 0);
 
   if (window.p3_setup) {
     window.p3_setup();
   }
-  let label = createP("World key: ").parent("container");
-  let inputBox = createInput("xyzzy");
-  inputBox.id("worldKey");
-  inputBox.parent(label);
-  inputBox.input(() => rebuildWorld(inputBox.value()));
-  
+
+  let label = createP("World key: ").parent("controls");
+  let input = createInput("xyzzy");
+  input.id("worldKey");
+  input.attribute("name", "worldKey");
+  input.parent(label);
+  input.input(() => rebuildWorld(input.value()));
+
+  let genLabel = createP("Choose Generator:").parent("controls");
+  let sel = createSelect().parent(genLabel);
+  sel.option("Movie Cube", "movie");
+  sel.option("Ant Killer", "ant");
+  sel.option("Dot Destroyer", "dot");
+  sel.changed(() => {
+    current = generators[sel.value()];
+    rebuildWorld(document.getElementById("worldKey").value);
+  });
 
   createP("Arrow keys scroll. Hold mouse down to decide on a movie to watch.")
-    .parent("container");
+    .parent("controls");
 
-  rebuildWorld(inputBox.value());
+  rebuildWorld(input.value());
 }
 
 function rebuildWorld(key) {
@@ -107,7 +99,6 @@ function mouseClicked() {
 }
 
 function draw() {
-  // Keyboard controls!
   if (keyIsDown(LEFT_ARROW)) {
     camera_velocity.x -= 1;
   }
@@ -121,10 +112,8 @@ function draw() {
     camera_velocity.y += 1;
   }
 
-  let camera_delta = new p5.Vector(0, 0);
-  camera_velocity.add(camera_delta);
   camera_offset.add(camera_velocity);
-  camera_velocity.mult(0.95); // cheap easing
+  camera_velocity.mult(0.95);
   if (camera_velocity.mag() < 0.01) {
     camera_velocity.setMag(0);
   }
@@ -142,7 +131,6 @@ function draw() {
   }
 
   let overdraw = 0.1;
-
   let y0 = Math.floor((0 - overdraw) * tile_rows);
   let y1 = Math.floor((1 + overdraw) * tile_rows);
   let x0 = Math.floor((0 - overdraw) * tile_columns);
@@ -150,19 +138,10 @@ function draw() {
 
   for (let y = y0; y < y1; y++) {
     for (let x = x0; x < x1; x++) {
-      drawTile(tileRenderingOrder([x + world_offset.x, y - world_offset.y]), [
-        camera_offset.x,
-        camera_offset.y
-      ]); // odd row
+      drawTile(tileRenderingOrder([x + world_offset.x, y - world_offset.y]), [camera_offset.x, camera_offset.y]);
     }
     for (let x = x0; x < x1; x++) {
-      drawTile(
-        tileRenderingOrder([
-          x + 0.5 + world_offset.x,
-          y + 0.5 - world_offset.y
-        ]),
-        [camera_offset.x, camera_offset.y]
-      ); // even rows are offset horizontally
+      drawTile(tileRenderingOrder([x + 0.5 + world_offset.x, y + 0.5 - world_offset.y]), [camera_offset.x, camera_offset.y]);
     }
   }
 
@@ -173,12 +152,12 @@ function draw() {
   }
 }
 
-// Display a discription of the tile at world_x, world_y.
+function tileRenderingOrder(offset) {
+  return [offset[1] - offset[0], offset[0] + offset[1]];
+}
+
 function describeMouseTile([world_x, world_y], [camera_x, camera_y]) {
-  let [screen_x, screen_y] = worldToScreen(
-    [world_x, world_y],
-    [camera_x, camera_y]
-  );
+  let [screen_x, screen_y] = worldToScreen([world_x, world_y], [camera_x, camera_y]);
   drawTileDescription([world_x, world_y], [0 - screen_x, screen_y]);
 }
 
@@ -191,12 +170,8 @@ function drawTileDescription([world_x, world_y], [screen_x, screen_y]) {
   pop();
 }
 
-
 function drawTile([world_x, world_y], [camera_x, camera_y]) {
-  let [screen_x, screen_y] = worldToScreen(
-    [world_x, world_y],
-    [camera_x, camera_y]
-  );
+  let [screen_x, screen_y] = worldToScreen([world_x, world_y], [camera_x, camera_y]);
   push();
   translate(0 - screen_x, screen_y);
   if (window.p3_drawTile) {

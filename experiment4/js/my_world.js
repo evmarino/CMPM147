@@ -160,11 +160,19 @@ const generators = {
         const ang = noise(head.x * 0.1, head.y * 0.1, frameCount * 0.01) * TWO_PI;
         const dxr = cos(ang), dyr = sin(ang);
         let dx = 0, dy = 0;
-        if (abs(dxr) > abs(dyr)) dx = dxr > 0 ? 1 : -1;
-        else dy = dyr > 0 ? 1 : -1;
+
+        if (abs(dxr) > abs(dyr)) {
+          dx = (dxr > 0) ? 1 : -1;
+          dy = 0;
+        } else {
+          dy = (dyr > 0) ? 1 : -1;
+          dx = 0;
+        }
+
         antPath.unshift({ x: head.x + dx, y: head.y + dy });
         if (antPath.length > maxLen) antPath.pop();
       }
+
       antPath.forEach((seg, idx) => {
         const [sx, sy] = worldToScreen([seg.x, seg.y], [camera_offset.x, camera_offset.y]);
         push();
@@ -176,6 +184,7 @@ const generators = {
         ellipse(0, 0, w, h);
         pop();
       });
+
       if (antAlive) {
         const head = antPath[0];
         const [hx, hy] = worldToScreen([head.x, head.y], [camera_offset.x, camera_offset.y]);
