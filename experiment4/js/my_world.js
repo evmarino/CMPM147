@@ -297,6 +297,17 @@ function mouseReleased() {
   activeKey = null;
 }
 
+function keyPressed() {
+  if (
+    keyCode === LEFT_ARROW ||
+    keyCode === RIGHT_ARROW ||
+    keyCode === UP_ARROW ||
+    keyCode === DOWN_ARROW
+  ) {
+    return false;
+  }
+}
+
 function p3_tileWidth() { return tw; }
 function p3_tileHeight() { return th; }
 function p3_tileClicked(i, j) { current.tileClicked(i, j); }

@@ -20,6 +20,14 @@
   <script src="../js/site.js" defer></script>
   <script src="./js/engine.js" defer></script>
   <script src="./js/my_world.js" defer></script>
+  <script>
+    window.addEventListener("keydown", function(e) {
+      // Arrow keys and space
+      if ( [32, 37, 38, 39, 40].includes(e.keyCode) ) {
+        e.preventDefault();
+      }
+    }, false);
+  </script>
 </head>
 
 <body>
@@ -59,7 +67,7 @@
     
     <nav id="Links" class="minor-section">
       <ul>
-        <li><a href="../index.html">Home</a></li>
+        <li><a href="..index.html/">Home</a></li>
       </ul>
     </nav>
   </main>
