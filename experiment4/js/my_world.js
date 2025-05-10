@@ -306,8 +306,12 @@ function keyPressed() {
   ) {
     return false;
   }
-}
 
+  if (key.toLowerCase() === 'r') {
+    rebuildWorld(lastKey);
+    return false;
+  }
+}
 function p3_tileWidth() { return tw; }
 function p3_tileHeight() { return th; }
 function p3_tileClicked(i, j) { current.tileClicked(i, j); }

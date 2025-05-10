@@ -1,0 +1,89 @@
+body {
+  margin: 1em;
+  font-family: "Jersey 15", sans-serif;
+}
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1em;
+}
+.controls label,
+.controls button {
+  font-size: 0.9em;
+  font-family: "Jersey 15", sans-serif;
+}
+.stats span {
+  margin-left: 1em;
+}
+.canvases {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1em;
+  margin-bottom: 1em;
+}
+
+.canvas-container {
+  border: 1px solid #ccc;
+  background: #fafafa;
+  padding: 0.5em;
+}
+
+.memory-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  justify-content: center;
+  margin-bottom: 2em;
+}
+.memory-strip img {
+  border: 1px solid #ccc;
+}
+
+.description {
+  max-width: 600px;
+  margin: 0 auto 2em;
+  line-height: 1.4;
+}
+.description h2,
+.description h3 {
+  margin-top: 1em;
+}
+
+footer {
+  text-align: center;
+  margin-top: 2em;
+}
+h1 {
+  font-family: "Jersey 15", sans-serif;
+  font-size: 2.5em;
+  text-align: center;
+  margin-bottom: 0.5em;
+}
+
+h2 {
+  font-family: "Jersey 15", sans-serif;
+  font-size: 1.8em;
+  margin-top: 1.5em;
+}
+
+p {
+  font-family: "Jersey 15", sans-serif;
+  font-size: 1.1em;
+  text-align: center;
+}
+.memory-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  justify-content: center;
+  margin-top: 1em;
+}
+
+.memory-strip img {
+  border: 1px solid #ccc;
+  max-width: 100px; 
+  height: auto;
+}

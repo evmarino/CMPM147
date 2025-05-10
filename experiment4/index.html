@@ -35,6 +35,16 @@
     <section>
       <h1>Experiment 4 - Three Infinite World Generators</h1>
 
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const fullscreenBtn = document.getElementById('fullscreen-button');
+          fullscreenBtn.addEventListener('click', () => {
+            let fs = fullscreen();
+            fullscreen(!fs);
+          });
+        });
+      </script>
+
       <div id="controls"></div>
       
       <div class="minor-section">
@@ -64,22 +74,13 @@
         <p>I really enjoyed implementing different kinds of generators in the same visual framework. Managing multiple procedural systems helped me better understand world seeding, modularity, and dynamic drawing techniques. I also learned the importance of thinking about user interaction styles like click vs hold across different generators.</p>
       </div>
     </section>
-    
-    <nav id="Links" class="minor-section">
-      <ul>
-        <li><a href="../index.html">Home</a></li>
-      </ul>
-    </nav>
-  </main>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const fullscreenBtn = document.getElementById('fullscreen-button');
-      fullscreenBtn.addEventListener('click', () => {
-        let fs = fullscreen();
-        fullscreen(!fs);
-      });
-    });
-  </script>
+		<nav id="links" class="minor-section">
+			<ul>
+				<li><a href="../index.html">Home</a></li>
+			</ul>
+		</nav>
+  </main>
+  
 </body>
 </html>

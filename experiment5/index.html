@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Experiment 5 — Evolutionary Impressions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!--  canvases always fill their panel — -->
+  <style>
+    #canvas-wrapper>.canvas-container>canvas {
+      display: block !important;
+      width: 50% !important;
+      height: auto !important;
+    }
+  </style>
+
+  <!-- Site-wide + experiment-specific CSS -->
+  <link rel="stylesheet" href="../css/site.css" />
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+  <!-- Optional: jQuery, Google Fonts, etc. -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Jersey+15&display=swap" rel="stylesheet">
+  <!-- p5.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+  <!-- code -->
+  <script src="my_design.js" defer></script>
+  <script src="sketch.js" defer></script>
+</head>
+
+<body>
+  <main id="content">
+    <section>
+      <h1>Experiment 5 — Evolutionary Impressions</h1>
+
+      <!-- Controls-->
+      <div class="minor-section">
+        <div class="controls">
+          <label>Active Image
+            <select id="dropper"></select>
+          </label>
+          <button id="restart">restart</button>
+          <label>Mutation rate (<span id="rate">100</span>%):
+            <input type="range" id="slider" min="1" max="100" value="100" />
+          </label>
+          <div class="stats">
+            <span>Active score: <strong id="activeScore">–</strong></span>
+            <span>Best score: <strong id="bestScore">–</strong></span>
+            <span>fps: <strong id="fpsCounter">–</strong></span>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="canvases minor-section">
+        <div id="reference" class="canvas-container"></div>
+        <div id="active" class="canvas-container"></div>
+        <div id="best" class="canvas-container"></div>
+      </div>
+      </div>
+
+
+      <div id="memory" class="minor-section memory-strip" data-max-items="15"></div>
+
+      <section class="minor-section description-box" style="font-family:'Jersey 15', cursive;">
+        <h2>Description</h2>
+        <p>
+          In this assignment, we build a generator that evolves abstractions toward the three inspiring photographs.
+          You can switch images, control the mutation rate, and watch two canvases side by side: the live mutation
+          (Active) and the best so far (Best). Under is the memory strip collecting past winning snapshots.
+        </p>
+      </section>
+
+
+      <section class="minor-section technical-box" style="font-family:'Jersey 15', cursive;">
+        <h2>Technical</h2>
+        <ul>
+          <li>Load and display three images, one being the initial reference.</li>
+          <li>Initialize an abstract design for each image.</li>
+          <li>Render, score, and anneal via Gaussian mutations.</li>
+          <li>Dropdown menu for images, restart button, mutation rate slider, and score display.</li>
+        </ul>
+      </section>
+
+
+      <section class="minor-section annealing-box" style="font-family:'Jersey 15', cursive;">
+        <h2>Annealing</h2>
+        <p>
+          Start with the slider at 100% and hit Restart to see different abstractions. Slowly drag
+          the slider down toward 0%, and see how the designs lock in as the mutation steps become ever smaller.
+        </p>
+      </section>
+
+
+      <nav id="links" class="minor-section">
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+        </ul>
+      </nav>
+    </section>
+  </main>
+</body>
+
+</html>
