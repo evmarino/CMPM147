@@ -11,6 +11,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: "Jersey 15", sans-serif;
 }
 
 #canvas-container {
@@ -27,6 +28,7 @@ body {
     padding: 0.2rem 0.6rem;
     cursor: pointer;
     z-index: 10;
+    font-family: "Jersey 15", sans-serif;
   }
   #prev-btn {
     left: 10px;
@@ -37,9 +39,31 @@ body {
 
 #prev-btn { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); }
 #next-btn { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); }
-#tour-btn { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); }
+#tour-btn { position: absolute; bottom: -12px; left: 40%; transform: translateX(-50%); font-family: "Jersey 15", sans-serif;}
+#generate {font-family: "Jersey 15", sans-serif;}
+#fullscreen {font-family: "Jersey 15", sans-serif;}
 
 #info-panel {
   overflow-y: auto;
   max-height: 550px; 
+}
+h1 {
+  justify-content: center;
+  text-align: center;
+  font-family: "Jersey 15", sans-serif;
+  font-size: 30px
+}
+
+h2 {
+  font-family: "Jersey 15", sans-serif;
+
+}
+
+.minor-section h2, body {
+  flex: 1;
+  padding: 10px;
+  font-size: 1.2em;
+  border: solid 1px #000000;
+  font-size: 25px;
+  border-radius: 10px;
 }

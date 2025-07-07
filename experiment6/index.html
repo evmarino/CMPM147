@@ -26,6 +26,8 @@
 		<!-- Load XXHash -->
 		<script type="text/javascript" src="./js/xxhash.min.js" DEFER></script>
 
+		<link href="https://fonts.googleapis.com/css2?family=Jersey+15&display=swap" rel="stylesheet">
+
 		<!-- Links to Javascript files -->
 		<script type="text/javascript" src="./js/site.js" DEFER></script>
 		<script type="text/javascript" src="./js/config.js" DEFER></script>
@@ -50,7 +52,7 @@
 		<!-- Style this page by changing the CSS in ../css/site.css or css/experiment.css -->
 		<main id="content">
 			<section>
-				<h1>REAL World</h1>
+				<h1>R.E.A.L World</h1>
 
 				<div class="minor-section">
 					<div style="display: flex; gap: 20px;">
@@ -71,10 +73,40 @@
 						<button id="generate">Generate</button>
 						<button style="float: right;" id="fullscreen">Fullscreen</button>
 						<button id="tour-btn">Tour Planet</button>
-						<li><a href="../index.html">Home</a></li>
 						</div> 
+				
 			</section>
 			<nav id="links" class="minor-section">
+
+				<div class="minor-section description-box">
+					<ul style="list-style-type: none; padding-left: 0;"></ul>
+					<h2>About the Developers!</h2>
+					<p> This project was developed for UCSC's CMPM 147: Generative Methods Class, which I took during the Spring 2025 quarter
+						I was in charge of all the isometric city related code, including the touring controls, placements, and closeups of these cities.
+
+						I worked alongside three of my fellow classmates: 
+						<li> Lore Generator by Raven Cruz James </li> 
+						<li> Planet Code by Lyle Watkins</li>
+						<li> NPC implementation by Andy Newton</li>
+					</p>
+				</ul>
+			</div>
+
+			<div class="minor-section">
+					<h2>Project Summary</h2>
+					<p>
+					Our project is an interactive webpage featuring a procedurally generated planet. We successfully generated a planet with varied terrain, cities, people, and lore. Users can click on areas of the planet to view lore snippets relating to the various cities and generate entirely new planets by setting a seed. A sun orbits around the planet, serving as its light source.
+					</p>
+				</div>
+
+				<div class="minor-section">
+					<h2> Reflection </h2>
+					<p>
+					I worked on the isometric city clusters and I originally wanted each cluster on the planet to be clickable for dragging and zooming in but quickly realized that was a little ambitious for the time being and my scope of knowledge on 3d models as is. So instead, I made a workaround and created a button that allows users to “tour the planet” and creates a carousel view of the cities so each city can be seen close up and rotated just like our main planet. It was a fun challenge using perlin noise in this way to determine city positioning and using math to calculate distances between cities. I overpopulated the planet on a few occasions because I wanted a more “full” look but ended up crashing the live server, so it was a trial and error process to see how many cities would fit smoothly onto the planet. Working in 3D models is a new skill for me and I hope to keep practicing in future projects, but I'm happy with how the cities turned out and I'm glad I was able to mess around with the shapes and configuration in the process without much pressure on getting it exactly right. 
+					</p>
+				</div>
+
+				<li><a href="../index.html">Home</a></li>
 			</nav>
 		</main>
 	</body>
