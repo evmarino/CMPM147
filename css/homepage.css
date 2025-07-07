@@ -8,7 +8,7 @@
 
 .two-column {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
 }
 
 .two-column>*:nth-child(1) {

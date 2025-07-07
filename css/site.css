@@ -8,6 +8,12 @@ h1, h2 {
   color: #000000;
   text-shadow: 3px 3px 1px rgb(243, 243, 243);
 }
+h1, h2 {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .two-column {
   display: flex;
@@ -26,20 +32,15 @@ h1, h2 {
 .minor-section {
   flex: 1;
   margin: 0;
-  padding: 10px;
+  padding: 12px;
   font-size: 30px;
-  border: solid 1px #000000;
-  border-radius: 10px;
-  color: #5c2153;
 }
 
 .minor-section h2 {
   flex: 1;
   padding: 10px;
   font-size: 1.2em;
-  border: solid 1px #000000;
   font-size: 30px;
-  border-radius: 10px;
 }
 
 .image-section {
@@ -51,8 +52,6 @@ h1, h2 {
 }
 
 .image-wrapper {
-  border: solid 1px #000000;
-  border-radius: 10px;
   font-size: 30px;
   display: flex;
   align-items: center;
@@ -64,7 +63,6 @@ h1, h2 {
   margin: 0 auto;
   max-width: 100%;
   height: auto;
-  border-radius: 10px;
   
 }
 .image-link {
@@ -109,7 +107,44 @@ body.is-fullscreen #canvas-container {
   margin: 0; /* Remove any default margins */
   z-index: 1000; /* Ensure it's above other content */
 }
- 
-html {
-  background-color: hsl(0, 19%, 87%);
+
+ul, .navbar-section {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid #e7e7e7;
+  background-color: #f3f3f3;
+  position: sticky;
+  top: 0;
+}
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 10px 16px;
+  text-decoration: none;
+}
+li a:hover {
+  background-color: #5c2153;
+}
+
+li {
+  border-right: 1px solid #bbb;
+}
+
+li:last-child {
+  border-right: none;
+}
+.navbar-section{
+  font-size: 30px;
+  border: 3px solid #5c2153;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
