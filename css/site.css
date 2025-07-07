@@ -108,7 +108,7 @@ body.is-fullscreen #canvas-container {
   z-index: 1000; /* Ensure it's above other content */
 }
 
-ul, .navbar-section {
+ ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
