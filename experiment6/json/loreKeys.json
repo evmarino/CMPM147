@@ -1,0 +1,75 @@
+{
+    "world": {
+        "name": {},
+        "economy": {
+            "maxPicks": "1",
+            "choices": [ 
+                 "none", "physical","ephemeral","hybrid"
+            ]
+        },
+        "resource_ranking": [],
+        "history": [],
+        "world_powers": []
+    },
+    "country": {
+        "name": {},
+        "ID": {},
+        "currency": {
+            "maxPicks": 1,
+            "choice_control": {
+                "location": "world",
+                "attribute":"economy",
+                "json": "economy"
+            }
+        },
+        "political_compass": {
+            "minPicks": 2,
+            "maxPicks": 2,
+            "choice_control": {
+                "process": "random_grid",
+                "json": "political_compass"
+            }
+        },
+        "government":{
+            "maxPicks": 1,
+            "choice_control": {
+                "location": "self",
+                "attribute":"political_compass",
+                "json": "government",
+                "special": "grid"
+            }
+        },
+        "resource": {
+            "maxPicks": 3,
+            "choices": [
+                "vegetation", "animal", "energy", "population", "oil", "gas", "minerals",
+                "agriculture", "water", "wind", "solar", "timber", "stone", "metal", "coal", 
+                "uranium", "sand", "salt", "fish", "livestock", "fungi", "clay", "peat", 
+                "resin", "sunlight", "geothermal", "tide", "insect", "amber", "crystals",
+                "knowledge", "spiritual-power", "labor", "infrastructure", "soup",
+                "obsidian", "ice", "flora", "microbes", "venom", "silk", "honey", "dyes",
+                "heat", "magnetism", "gravity", "quartz", "copper", "iron", "lithium",
+                "relics", "mycelium", "textiles", "spices", "ceramics", "paper", "wool",
+                "data", "codes", "aether", "mana", "dream-essence", "songstones",
+                "nanomatter", "carbon", "plastic", "tech-scrap", "junkmetal", "hydrogen"
+            ]
+        },
+        "culture": {
+            "maxPicks": 3,
+            "choices": [
+                "music", "holidays", "food", "theater", "film", "tv", "games", "sports",
+                "social", "tradition", "dance", "ritual", "fashion", "mythology", 
+                "storytelling", "architecture", "ceremony", "crafts", "literature", 
+                "visual art", "tattoos", "calligraphy", "comedy", "puppetry", "opera", 
+                "folklore", "festivals", "parades", "masks", "philosophy", "etiquette", 
+                "language", "spirituality", "symbolism", "hospitality", "interpersonal",
+                "family structure", "naming", "superstition", "memory sharing", 
+                "virtual ritual", "shared dreams", "cosmic worship"
+            ]
+        },
+        "allies": {},
+        "enemies": {},
+        "economy_strength": {},
+        "worries": {}
+    }
+}

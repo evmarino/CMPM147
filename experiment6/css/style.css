@@ -1,0 +1,45 @@
+/* style.css */
+
+/* Set the canvas element to be the full size of the container */
+canvas {
+    width: 100%;
+    height: 100%;
+}
+
+/* Center the canvas element on the page */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#canvas-container {
+    width: 1000px;
+    height: 600px;
+}
+.arrow-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.8);
+    border: none;
+    font-size: 2rem;
+    padding: 0.2rem 0.6rem;
+    cursor: pointer;
+    z-index: 10;
+  }
+  #prev-btn {
+    left: 10px;
+  }
+  #next-btn {
+    right: 10px;
+  }
+
+#prev-btn { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); }
+#next-btn { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); }
+#tour-btn { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); }
+
+#info-panel {
+  overflow-y: auto;
+  max-height: 550px; 
+}
